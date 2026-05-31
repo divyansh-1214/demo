@@ -26,21 +26,21 @@ export default function Sidebar() {
     <>
       <aside
         className={`min-h-screen bg-[#201F1F] border-r border-white/5 transition-all duration-300 ease-in-out hidden md:flex flex-col overflow-hidden ${isCollapsed
-            ? "w-20 px-3 py-8"
-            : "w-20 px-3 py-8 lg:w-64 lg:p-8"
+          ? "w-20 px-3 py-8"
+          : "w-20 px-3 py-8 lg:w-64 lg:p-8"
           }`}
         aria-label="Sidebar"
       >
         <header className="flex items-center justify-between gap-3 mb-8">
-          <div className="flex items-center gap-3 overflow-hidden">
+          <span className="flex items-center gap-3 overflow-hidden">
             <GraduationCap size={28} className="flex-shrink-0 text-indigo-400" />
-            <div className={`text-lg font-bold leading-tight transition-all duration-300 overflow-hidden whitespace-nowrap ${isCollapsed ? "w-0 opacity-0 pointer-events-none" : "w-0 opacity-0 pointer-events-none lg:w-auto lg:opacity-100"
+            <span className={`text-lg font-bold leading-tight transition-all duration-300 overflow-hidden whitespace-nowrap ${isCollapsed ? "w-0 opacity-0 pointer-events-none" : "w-0 opacity-0 pointer-events-none lg:w-auto lg:opacity-100"
               }`}>
               Next - <span className="text-[#ADC6FF]">Gen</span>
               <br />
               Learning
-            </div>
-          </div>
+            </span>
+          </span>
         </header>
 
         <nav aria-label="Main Navigation" className="flex-1">
@@ -64,10 +64,10 @@ export default function Sidebar() {
                       }`}>
                       {link.name}
                     </span>
-                    <div className={`absolute left-full ml-4 px-3 py-1.5 bg-[#1A1A1D] border border-white/10 text-xs font-medium text-white rounded-lg opacity-0 scale-95 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-x-1 z-50 shadow-xl whitespace-nowrap ${isCollapsed ? "block" : "block lg:hidden"
+                    <span role="tooltip" className={`absolute left-full ml-4 px-3 py-1.5 bg-[#1A1A1D] border border-white/10 text-xs font-medium text-white rounded-lg opacity-0 scale-95 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-x-1 z-50 shadow-xl whitespace-nowrap ${isCollapsed ? "block" : "block lg:hidden"
                       }`}>
                       {link.name}
-                    </div>
+                    </span>
                   </a>
                 </li>
               );

@@ -1,5 +1,7 @@
+"use client";
 
 import { useMemo } from "react";
+import SpotlightCard from "./SpotlightCard";
 
 interface StreakProps {
   weeks?: number;
@@ -74,7 +76,23 @@ export default function Streak({
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
 
   return (
-    <article className="rounded-3xl border border-white/10 bg-gradient-to-b from-[#0b0b0c] to-[#111113] p-6 text-white shadow-xl">
+    <SpotlightCard 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ 
+        scale: 1.015,
+        borderColor: "rgba(173, 198, 255, 0.25)",
+        boxShadow: "0 20px 35px -15px rgba(0, 0, 0, 0.6), 0 0 15px 1px rgba(173, 198, 255, 0.08)"
+      }}
+      transition={{ 
+        opacity: { duration: 0.4, delay: 0.25 },
+        y: { type: "spring", stiffness: 300, damping: 20, delay: 0.25 },
+        scale: { type: "spring", stiffness: 300, damping: 20 },
+        borderColor: { type: "spring", stiffness: 300, damping: 20 },
+        boxShadow: { type: "spring", stiffness: 300, damping: 20 }
+      }}
+      className="rounded-3xl border border-white/10 bg-gradient-to-b from-[#0b0b0c] to-[#111113] p-6 text-white shadow-xl cursor-pointer"
+    >
       <header className="flex flex-col gap-5">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">{title}</h2>
@@ -104,9 +122,9 @@ export default function Streak({
         </div>
       </header>
 
-      <div className="mt-6 grid gap-5 grid-cols-1 lg:grid-cols-[1fr_320px]">
+      <section className="mt-6 grid gap-5 grid-cols-1 lg:grid-cols-[1fr_320px]">
         <figure className="rounded-2xl bg-white/[0.03] p-4 overflow-x-auto min-w-0 scrollbar-thin">
-          <div className="min-w-[800px] pr-2">
+          <section className="min-w-[800px] pr-2">
             <figcaption className="mb-4 text-sm text-gray-400">
               Learning consistency over the last {weeks} weeks
             </figcaption>
@@ -140,7 +158,7 @@ export default function Streak({
                 </div>
               ))}
             </div>
-          </div>
+          </section>
         </figure>
         <section
           aria-labelledby="deadlines-heading"
@@ -186,7 +204,7 @@ export default function Streak({
             ))}
           </ul>
         </section>
-      </div>
-    </article>
+      </section>
+    </SpotlightCard>
   );
 }
