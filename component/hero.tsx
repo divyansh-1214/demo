@@ -4,9 +4,9 @@ export default function Hero() {
   return (
     <section
       aria-labelledby="welcome-heading"
-      className="grid grid-cols-3 gap-6"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
     >
-      <article className="col-span-2 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg backdrop-blur-xl">
+      <article className="col-span-1 md:col-span-1 lg:col-span-2 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg backdrop-blur-xl">
         <header>
           <h1 id="welcome-heading" className="text-3xl font-bold">
             Welcome back, Divyansh
@@ -35,7 +35,7 @@ export default function Hero() {
       </article>
 
       <aside
-        className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg backdrop-blur-xl"
+        className="col-span-1 md:col-span-1 lg:col-span-1 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg backdrop-blur-xl"
         aria-label="Learning Insights"
       >
         <section

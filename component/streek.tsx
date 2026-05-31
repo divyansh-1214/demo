@@ -104,40 +104,42 @@ export default function Streak({
         </div>
       </header>
 
-      <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_320px]">
-        <figure className="rounded-2xl bg-white/[0.03] p-4">
-          <figcaption className="mb-4 text-sm text-gray-400">
-            Learning consistency over the last {weeks} weeks
-          </figcaption>
+      <div className="mt-6 grid gap-5 grid-cols-1 lg:grid-cols-[1fr_320px]">
+        <figure className="rounded-2xl bg-white/[0.03] p-4 overflow-x-auto min-w-0 scrollbar-thin">
+          <div className="min-w-[800px] pr-2">
+            <figcaption className="mb-4 text-sm text-gray-400">
+              Learning consistency over the last {weeks} weeks
+            </figcaption>
 
-          <div className="mb-3 flex justify-between text-xs text-gray-500">
-            {months.map((month) => (
-              <span key={month}>{month}</span>
-            ))}
-          </div>
+            <div className="mb-3 flex justify-between text-xs text-gray-500">
+              {months.map((month) => (
+                <span key={month}>{month}</span>
+              ))}
+            </div>
 
-          <div
-            role="grid"
-            aria-label="Learning activity heatmap"
-            className="grid grid-flow-col grid-rows-7 auto-cols-[12px] gap-1.5 relative"
-            style={{
-              gridTemplateColumns: `repeat(${cols}, 12px)`,
-            }}
-          >
-            {cells.map((value, index) => (
-              <div
-                key={index}
-                role="gridcell"
-                aria-label={`${value} learning activities`}
-                className={`group  h-3 w-3 rounded-sm transition-all hover:scale-125 ${levelClass(
-                  value
-                )}`}
-              >
-                <span className="absolute top-5 left-1/2 hidden -translate-x-1/2 rounded-md bg-black px-2 py-1 text-xs group-hover:block">
-                  {value} activities
-                </span>
-              </div>
-            ))}
+            <div
+              role="grid"
+              aria-label="Learning activity heatmap"
+              className="grid grid-flow-col grid-rows-7 auto-cols-[12px] gap-1.5 relative"
+              style={{
+                gridTemplateColumns: `repeat(${cols}, 12px)`,
+              }}
+            >
+              {cells.map((value, index) => (
+                <div
+                  key={index}
+                  role="gridcell"
+                  aria-label={`${value} learning activities`}
+                  className={`group  h-3 w-3 rounded-sm transition-all hover:scale-125 ${levelClass(
+                    value
+                  )}`}
+                >
+                  <span className="absolute top-5 left-1/2 hidden -translate-x-1/2 rounded-md bg-black px-2 py-1 text-xs group-hover:block z-20">
+                    {value} activities
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </figure>
         <section

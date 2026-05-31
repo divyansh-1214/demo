@@ -11,7 +11,7 @@ function ActiveCoursesSkeleton() {
   return (
     <div className="mt-8" aria-label="Loading Active Courses">
       <h2 className="text-xl font-semibold mb-4 text-white/50">Active Courses</h2>
-      <div className="grid gap-6 md:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {Array.from({ length: 4 }).map((_, index) => (
           <div
             key={index}
@@ -35,7 +35,6 @@ function ActiveCoursesSkeleton() {
   );
 }
 
-// Separate Server Component to handle fetching data from Supabase
 async function ActiveCoursesSection() {
   let coursesData = null;
   let hasError = false;
@@ -52,7 +51,7 @@ async function ActiveCoursesSection() {
 
 function DashboardContent() {
   return (
-    <div className="min-h-screen bg-[#0F0F11] text-white flex">
+    <div className="min-h-screen bg-[#0F0F11] text-white flex flex-col md:flex-row pb-16 md:pb-0">
       <Sidebar />
 
       <div className="flex flex-col flex-1 min-w-0">
@@ -60,7 +59,7 @@ function DashboardContent() {
           <Nav />
         </header>
 
-        <main className="flex-1 p-8 space-y-8 overflow-y-auto">
+        <main className="flex-1 p-4 md:p-8 space-y-8 overflow-y-auto">
           <Hero />
           <Suspense fallback={<ActiveCoursesSkeleton />}>
             <ActiveCoursesSection />
