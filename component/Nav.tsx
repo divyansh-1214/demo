@@ -4,11 +4,12 @@ import { Bell, CircleQuestionMark, Search, Menu } from "lucide-react";
 import { useSidebar } from "./SidebarContext";
 import Image from "next/image";
 export default function Nav() {
-  const { toggleSidebar } = useSidebar();
+  const { isCollapsed, toggleSidebar } = useSidebar();
 
   return (
-    <nav
-      aria-label="Dashboard Navigation"
+    <div
+      role="toolbar"
+      aria-label="Dashboard Toolbar"
       className="flex items-center justify-between px-4 md:px-8 py-4 md:py-5 gap-3 md:gap-4"
     >
       <div className="flex items-center gap-3 md:gap-4 flex-1">
@@ -16,10 +17,11 @@ export default function Nav() {
           onClick={toggleSidebar}
           className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition hidden md:flex items-center justify-center cursor-pointer"
           aria-label="Toggle sidebar"
+          aria-expanded={!isCollapsed}
         >
           <Menu size={20} aria-hidden="true" />
         </button>
-        <form className="relative w-full max-w-md">
+        <form role="search" className="relative w-full max-w-md">
           <Search
             size={18}
             className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
@@ -57,6 +59,6 @@ export default function Nav() {
           className="h-8 w-8 md:h-10 md:w-10 rounded-full object-cover shrink-0"
         />
       </div>
-    </nav>
+    </div>
   );
 }

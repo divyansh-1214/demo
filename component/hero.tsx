@@ -2,17 +2,7 @@
 
 import { Check, Clock, Flame } from "lucide-react";
 import PuzzleCard from "./PuzzleCard";
-
-interface UserData {
-  id: number;
-  first_name: string;
-  last_name: string;
-  current_streak: number;
-  courses_completed: number;
-  hours_learned: number;
-  github?: string | null;
-  linkedin?: string | null;
-}
+import type { UserData } from "@/lib/api/profile/get";
 
 interface HeroProps {
   userData?: UserData[] | null;
@@ -35,7 +25,7 @@ export default function Hero({ userData }: HeroProps) {
         rightEdge={{ type: "cutout", position: 155, radius: 30 }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.05 }}
+        transition={{ opacity: { duration: 0.4, delay: 0.05 }, y: { type: "spring", stiffness: 300, damping: 20, delay: 0.05 } }}
         className="rounded-4xl cursor-pointer flex flex-col justify-between relative overflow-hidden"
         style={{
           height: "310px",
@@ -118,6 +108,7 @@ export default function Hero({ userData }: HeroProps) {
               viewBox="0 0 148 60"
               fill="none"
               className=""
+              aria-hidden="true"
             >
               {/* Track arc  */}
               <path
@@ -155,7 +146,7 @@ export default function Hero({ userData }: HeroProps) {
           bottomEdge={{ type: "cutout", position: "center", radius: 22 }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+          transition={{ opacity: { duration: 0.4, delay: 0.15 }, y: { type: "spring", stiffness: 300, damping: 20, delay: 0.15 } }}
           className="rounded-4xl cursor-pointer flex flex-col items-center justify-center text-center"
           style={{
             height: "155px",
@@ -170,9 +161,9 @@ export default function Hero({ userData }: HeroProps) {
             <p className="text-[44px] font-black text-white leading-none tracking-tight mb-1">
               {coursesCompleted}
             </p>
-            <h3 className="text-[8px] uppercase tracking-[0.25em] font-bold text-gray-500">
+            <h2 className="text-[8px] uppercase tracking-[0.25em] font-bold text-gray-500">
               Courses Completed
-            </h3>
+            </h2>
           </div>
         </PuzzleCard>
 
@@ -181,7 +172,7 @@ export default function Hero({ userData }: HeroProps) {
           topEdge={{ type: "tab", position: "center", radius: 22 }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
+          transition={{ opacity: { duration: 0.4, delay: 0.25 }, y: { type: "spring", stiffness: 300, damping: 20, delay: 0.25 } }}
           className="rounded-4xl cursor-pointer flex flex-col items-center justify-center text-center"
           style={{
             height: "155px",
@@ -196,9 +187,9 @@ export default function Hero({ userData }: HeroProps) {
             <p className="text-[44px] font-black text-white leading-none tracking-tight mb-1">
               {hoursLearned}
             </p>
-            <h3 className="text-[8px] uppercase tracking-[0.25em] font-bold text-gray-500">
+            <h2 className="text-[8px] uppercase tracking-[0.25em] font-bold text-gray-500">
               Hours Learned
-            </h3>
+            </h2>
           </div>
         </PuzzleCard>
       </div>

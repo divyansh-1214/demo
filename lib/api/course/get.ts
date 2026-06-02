@@ -1,11 +1,19 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 
+export interface CourseData {
+  id?: string;
+  title: string;
+  progress: number;
+  icon_name: string;
+  created_at?: string;
+}
+
 export async function getCoursesData() {
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
 
-  const { data, error } = await supabase.from("courses").select("*");
+  const { data, error } = await supabase.from("courses").select("*").returns<CourseData[]>();
 
 
   if (error) {

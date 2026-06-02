@@ -66,8 +66,8 @@ export default function Streak({
   ];
 
   return (
-    <section aria-label="Learning activity and deadlines">
-      {/* Desktop puzzle (xl+): side-by-side with interlocking right/left edges */}
+  <div className="space-y-4 xl:space-y-0">
+    {/* Desktop puzzle (xl+): side-by-side with interlocking right/left edges */}
       <div className="hidden xl:grid xl:grid-cols-[1fr_320px] xl:gap-0">
         {/* Learning Activity Card */}
         <PuzzleCard
@@ -80,10 +80,11 @@ export default function Streak({
           }}
           className="rounded-4xl bg-linear-to- from-[#141420] to-[#0d0d18] text-white cursor-pointer"
           style={{ minHeight: "340px" }}
+          aria-labelledby="desktop-activity-heading"
         >
           <div className="p-8 flex flex-col h-full">
             <header className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold">{title}</h2>
+              <h2 id="desktop-activity-heading" className="text-2xl font-bold">{title}</h2>
               <div
                 aria-label="Activity intensity legend"
                 className="flex items-center gap-1.5 text-[10px] text-gray-500 font-bold uppercase tracking-[0.15em]"
@@ -106,8 +107,8 @@ export default function Streak({
             >
               <div className="min-w-175">
                 <div
-                  role="grid"
-                  aria-label="Learning activity heatmap"
+                  role="img"
+                  aria-label="Learning activity heatmap showing daily study consistency over the past year"
                   className="relative isolate grid grid-flow-col grid-rows-7 gap-1.25"
                   style={{
                     gridTemplateColumns: `repeat(${cols}, 13px)`,
@@ -118,7 +119,6 @@ export default function Streak({
                   {cells.map((value, index) => (
                     <div
                       key={index}
-                      role="gridcell"
                       aria-label={`${value} activities`}
                       className={`group relative z-0 h-3.25 w-3.25 rounded-[3px] transition-all duration-150 hover:z-30 hover:scale-150 hover:ring-1 hover:ring-white/25 ${levelClass(value)}`}
                       onMouseEnter={() => setHoveredIndex(index)}
@@ -182,12 +182,12 @@ export default function Streak({
           aria-labelledby="deadlines-heading"
         >
           <div className="p-8 flex flex-col h-full">
-            <h3
+            <h2
               id="deadlines-heading"
               className="mb-6 text-2xl font-bold text-white"
             >
               Upcoming Deadlines
-            </h3>
+            </h2>
 
             <ul className="space-y-4 flex-1">
               {deadlines.map((task) => (
@@ -196,11 +196,11 @@ export default function Streak({
                   className="rounded-2xl border border-white/6 bg-white/2 p-4 transition hover:bg-white/4 hover:border-white/1 group"
                 >
                   <article className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-sm border-2 border-white/15 bg-white/[0.02] flex-shrink-0 mt-0.5 group-hover:border-white/30 transition-colors" />
+                    <div className="w-5 h-5 rounded-sm border-2 border-white/15 bg-white/[0.02] flex-shrink-0 mt-0.5 group-hover:border-white/30 transition-colors" aria-hidden="true" />
                     <div>
-                      <h4 className="font-semibold text-white/90 text-[13px] leading-snug">
+                      <h3 className="font-semibold text-white/90 text-[13px] leading-snug">
                         {task.title}
-                      </h4>
+                      </h3>
                       <time className="mt-1 flex items-center gap-1 text-[11px] font-bold text-orange-400/80">
                         <CalendarDays size={11} />
                         {task.due}
@@ -221,9 +221,9 @@ export default function Streak({
       {/* Mobile / Tablet fallback: stacked cards with gaps */}
       <div className="xl:hidden space-y-4">
         {/* Learning Activity */}
-        <div className="rounded-2xl border border-white/[0.07] bg-gradient-to-b from-[#141420] to-[#0d0d18] p-6 text-white overflow-hidden">
+        <section aria-labelledby="mobile-activity-heading" className="rounded-2xl border border-white/[0.07] bg-gradient-to-b from-[#141420] to-[#0d0d18] p-6 text-white overflow-hidden">
           <header className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold">{title}</h2>
+            <h2 id="mobile-activity-heading" className="text-xl font-bold">{title}</h2>
             <div className="flex items-center gap-1.5 text-[10px] text-gray-500 font-bold uppercase tracking-widest">
               <span>Less</span>
               {[0, 1, 2, 3, 4].map((l) => (
@@ -238,7 +238,7 @@ export default function Streak({
           <div className="overflow-x-auto pb-2">
             <div className="min-w-[600px]">
               <div
-                role="grid"
+                role="img"
                 aria-label="Learning activity heatmap"
                 className="grid grid-flow-col grid-rows-7 gap-[4px]"
                 style={{
@@ -248,7 +248,6 @@ export default function Streak({
                 {cells.slice(0, Math.min(cols, 40) * 7).map((value, index) => (
                   <div
                     key={index}
-                    role="gridcell"
                     className={`h-[11px] w-[11px] rounded-[2px] ${levelClass(value)}`}
                   />
                 ))}
@@ -283,13 +282,13 @@ export default function Streak({
               ))}
             </ul>
           </section>
-        </div>
+        </section>
 
         {/* Upcoming Deadlines */}
-        <div className="rounded-2xl border border-white/[0.07] bg-gradient-to-b from-[#141420] to-[#0d0d18] p-6">
-          <h3 className="text-xl font-bold text-white mb-5">
+        <section aria-labelledby="mobile-deadlines-heading" className="rounded-2xl border border-white/[0.07] bg-gradient-to-b from-[#141420] to-[#0d0d18] p-6">
+          <h2 id="mobile-deadlines-heading" className="text-xl font-bold text-white mb-5">
             Upcoming Deadlines
-          </h3>
+          </h2>
           <ul className="space-y-3">
             {deadlines.map((task) => (
               <li
@@ -297,11 +296,11 @@ export default function Streak({
                 className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4"
               >
                 <article className="flex items-start gap-3">
-                  <div className="w-4 h-4 rounded-[3px] border-2 border-white/15 flex-shrink-0 mt-0.5" />
+                  <div className="w-4 h-4 rounded-[3px] border-2 border-white/15 flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
-                    <h4 className="font-semibold text-white/90 text-[13px]">
+                    <h3 className="font-semibold text-white/90 text-[13px]">
                       {task.title}
-                    </h4>
+                    </h3>
                     <time className="mt-1 flex items-center gap-1 text-[11px] font-bold text-orange-400/80">
                       <CalendarDays size={11} />
                       {task.due}
@@ -311,8 +310,8 @@ export default function Streak({
               </li>
             ))}
           </ul>
-        </div>
+        </section>
       </div>
-    </section>
+    </div>
   );
 }

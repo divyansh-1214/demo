@@ -1,15 +1,7 @@
 "use client";
 
-import { Code, Code2 } from "lucide-react";
 import PuzzleCard from "./PuzzleCard";
-
-interface CourseData {
-  id?: string;
-  title: string;
-  progress: number;
-  icon_name: string;
-  created_at?: string;
-}
+import type { CourseData } from "@/lib/api/course/get";
 
 interface ActiveProps {
   courses?: CourseData[];
@@ -52,9 +44,9 @@ export default function Active({ courses = DEFAULT_COURSES, error = false }: Act
   const displayCourses = courses && courses.length > 0 ? courses : DEFAULT_COURSES;
 
   return (
-    <section className="mt-0" aria-label="Active Courses">
+    <section className="mt-0" aria-labelledby="active-courses-heading">
       <div className="flex items-center justify-between mb-5">
-        <h2 className="text-2xl font-bold text-white">Active Courses</h2>
+        <h2 id="active-courses-heading" className="text-2xl font-bold text-white">Active Courses</h2>
         <a
           href="#"
           className="text-sm font-semibold text-gray-500 hover:text-white transition-colors flex items-center gap-1"
@@ -64,7 +56,7 @@ export default function Active({ courses = DEFAULT_COURSES, error = false }: Act
       </div>
 
       {error && (
-        <aside
+        <div
           className="mb-6 rounded-2xl border border-red-500/20 bg-red-500/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
           role="alert"
         >
@@ -75,7 +67,7 @@ export default function Active({ courses = DEFAULT_COURSES, error = false }: Act
           <span className="text-[10px] uppercase tracking-wider font-bold text-red-400 bg-red-400/10 px-2.5 py-1 rounded-md">
             Offline
           </span>
-        </aside>
+        </div>
       )}
 
       {/* Desktop (xl): 4-col puzzle row, gap-0 */}
@@ -116,6 +108,7 @@ export default function Active({ courses = DEFAULT_COURSES, error = false }: Act
                     aria-valuenow={value.progress}
                     aria-valuemin={0}
                     aria-valuemax={100}
+                    aria-label={`${value.title} progress`}
                   >
                     <div
                       className="h-full rounded-full transition-all duration-700"
@@ -164,6 +157,7 @@ export default function Active({ courses = DEFAULT_COURSES, error = false }: Act
                     aria-valuenow={value.progress}
                     aria-valuemin={0}
                     aria-valuemax={100}
+                    aria-label={`${value.title} progress`}
                   >
                     <div
                       className="h-full rounded-full transition-all duration-700"
