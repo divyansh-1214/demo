@@ -7,8 +7,21 @@ import Nav from "@/component/Nav";
 import Sidebar from "@/component/Sidebar";
 import Streek from "@/component/streek";
 import { SidebarProvider } from "@/component/SidebarContext";
-import { getCoursesData } from "@/lib/api/get";
+import { getCoursesData } from "@/lib/api/course/get";
+import { getUserData } from "@/lib/api/profile/get";
 import ActiveCoursesSkeleton from "@/component/activeCoursesSkeleton";
+import HeroSkeleton from "@/component/heroSkeleton";
+
+async function HeroSection() {
+  let userData = null;
+  try {
+    userData = await getUserData();
+  } catch (error) {
+    console.error("Failed to load user profile data:", error);
+  }
+
+  return <Hero userData={userData} />;
+}
 
 async function ActiveCoursesSection() {
   let coursesData = null;
@@ -35,7 +48,9 @@ function DashboardContent() {
         </header>
 
         <main className="flex-1 p-4 md:p-8 space-y-8 ">
-          <Hero />
+          <Suspense fallback={<HeroSkeleton />}>
+            <HeroSection />
+          </Suspense>
           <Suspense fallback={<ActiveCoursesSkeleton />}>
             <ActiveCoursesSection />
           </Suspense>

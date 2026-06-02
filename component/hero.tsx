@@ -3,7 +3,28 @@
 import { Check, Clock, Flame } from "lucide-react";
 import PuzzleCard from "./PuzzleCard";
 
-export default function Hero() {
+interface UserData {
+  id: number;
+  first_name: string;
+  last_name: string;
+  current_streak: number;
+  courses_completed: number;
+  hours_learned: number;
+  github?: string | null;
+  linkedin?: string | null;
+}
+
+interface HeroProps {
+  userData?: UserData[] | null;
+}
+
+export default function Hero({ userData }: HeroProps) {
+  const primaryUser = userData?.[0];
+  const name = primaryUser ? `${primaryUser.first_name} ${primaryUser.last_name}` : "Divyansh Srivastava";
+  const streak = primaryUser?.current_streak ?? 24;
+  const coursesCompleted = primaryUser?.courses_completed ?? 12;
+  const hoursLearned = primaryUser?.hours_learned ?? 148;
+
   return (
     <section
       aria-labelledby="welcome-heading"
@@ -26,18 +47,42 @@ export default function Hero() {
         <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-indigo-600/60 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-32 w-48 h-48 rounded-full bg-purple-600/10 blur-3xl pointer-events-none" />
 
-        <header className="relative flex flex-col gap-3 z-10 p-8 pb-10">
+        <header className="relative flex flex-col gap-3 z-10 p-5">
           <h1
             id="welcome-heading"
             className="text-3xl xl:text-4xl font-extrabold tracking-tight text-white mb-2.5 leading-tight"
           >
-            Welcome back, Divyansh.
+            Welcome back, {name}.
           </h1>
           <p className="text-gray-400 font-medium text-sm xl:text-base max-w-md">
             You&apos;re in the top{" "}
             <span className="text-[#ADC6FF] font-bold">5%</span> of learners
             this week. Keep up the momentum.
           </p>
+          {primaryUser && (
+            <div className="flex flex-wrap gap-2 pt-1 text-[11px] font-medium text-gray-300">
+              {primaryUser.github ? (
+                <a
+                  href={primaryUser.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 hover:bg-white/10 transition"
+                >
+                  GitHub
+                </a>
+              ) : null}
+              {primaryUser.linkedin ? (
+                <a
+                  href={primaryUser.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 hover:bg-white/10 transition"
+                >
+                  LinkedIn
+                </a>
+              ) : null}
+            </div>
+          )}
         </header>
 
         <div className="relative z-20 px-8 pb-8 flex items-end justify-between">
@@ -58,7 +103,7 @@ export default function Hero() {
               </span>
               <div className="flex items-baseline gap-1">
                 <strong className="text-2xl font-extrabold text-white leading-none">
-                  24
+                  {streak}
                 </strong>
                 <span className="text-xs text-gray-400 font-medium">Days</span>
               </div>
@@ -123,7 +168,7 @@ export default function Hero() {
           </div>
           <div className="flex flex-col items-center gap-2">
             <p className="text-[44px] font-black text-white leading-none tracking-tight mb-1">
-              12
+              {coursesCompleted}
             </p>
             <h3 className="text-[8px] uppercase tracking-[0.25em] font-bold text-gray-500">
               Courses Completed
@@ -137,19 +182,19 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="rounded-[2rem] cursor-pointer flex flex-col items-center justify-center text-center"
+          className="rounded-4xl cursor-pointer flex flex-col items-center justify-center text-center"
           style={{
             height: "155px",
             background: "linear-gradient(180deg, #16172a 0%, #0e0f1a 100%)",
           }}
           aria-label="Hours Learned"
         >
-          <div className="w-8 h-8 rounded-full bg-white/[0.05] ring-1 ring-white/[0.09] flex items-center justify-center mb-2 relative left-3 top-3">
+          <div className="w-8 h-8 rounded-full bg-white/5 ring-1 ring-white/9 flex items-center justify-center mb-2 relative left-3 top-3">
             <Clock size={15} aria-hidden="true" className="text-gray-400" />
           </div>
           <div className="flex flex-col items-center gap-2">
             <p className="text-[44px] font-black text-white leading-none tracking-tight mb-1">
-              148
+              {hoursLearned}
             </p>
             <h3 className="text-[8px] uppercase tracking-[0.25em] font-bold text-gray-500">
               Hours Learned
@@ -160,15 +205,15 @@ export default function Hero() {
 
       {/* Mobile stat cards */}
       <div className="flex xl:hidden gap-4">
-        <div className="flex-1 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 flex flex-col items-center text-center">
-          <p className="text-4xl font-black text-white leading-none mb-1">12</p>
+        <div className="flex-1 rounded-2xl border border-white/[0.07] bg-white/2 p-5 flex flex-col items-center text-center">
+          <p className="text-4xl font-black text-white leading-none mb-1">{coursesCompleted}</p>
           <span className="text-[9px] uppercase tracking-wider font-bold text-gray-500">
             Courses Completed
           </span>
         </div>
-        <div className="flex-1 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 flex flex-col items-center text-center">
+        <div className="flex-1 rounded-2xl border border-white/[0.07] bg-white/2 p-5 flex flex-col items-center text-center">
           <p className="text-4xl font-black text-white leading-none mb-1">
-            148
+            {hoursLearned}
           </p>
           <span className="text-[9px] uppercase tracking-wider font-bold text-gray-500">
             Hours Learned
