@@ -66,8 +66,8 @@ export default function Streak({
   ];
 
   return (
-  <div className="space-y-4 xl:space-y-0">
-    {/* Desktop puzzle (xl+): side-by-side with interlocking right/left edges */}
+    <div className="space-y-4 xl:space-y-0">
+      {/* Desktop puzzle (xl+): side-by-side with interlocking right/left edges */}
       <div className="hidden xl:grid xl:grid-cols-[1fr_320px] xl:gap-0">
         {/* Learning Activity Card */}
         <PuzzleCard
@@ -84,7 +84,9 @@ export default function Streak({
         >
           <div className="p-8 flex flex-col h-full">
             <header className="flex items-center justify-between mb-8">
-              <h2 id="desktop-activity-heading" className="text-2xl font-bold">{title}</h2>
+              <h2 id="desktop-activity-heading" className="text-2xl font-bold">
+                {title}
+              </h2>
               <div
                 aria-label="Activity intensity legend"
                 className="flex items-center gap-1.5 text-[10px] text-gray-500 font-bold uppercase tracking-[0.15em]"
@@ -100,7 +102,6 @@ export default function Streak({
               </div>
             </header>
 
-            {/* overflow-x-auto but overflow-y-visible so tooltips show above */}
             <div
               className="overflow-x-auto pb-2"
               style={{ overflowY: "visible" }}
@@ -124,7 +125,6 @@ export default function Streak({
                       onMouseEnter={() => setHoveredIndex(index)}
                       onMouseLeave={() => setHoveredIndex(null)}
                     >
-                      {/* Tooltip rendered above the cell */}
                       {hoveredIndex === index && (
                         <div className="pointer-events-none absolute bottom-[calc(100%+6px)] left-1/2 z-50 flex -translate-x-1/2 flex-col items-center">
                           <div className="whitespace-nowrap rounded-lg border border-white/10 bg-[#1a1a2e] px-2.5 py-1 text-[11px] font-semibold text-white shadow-xl">
@@ -196,7 +196,10 @@ export default function Streak({
                   className="rounded-2xl border border-white/6 bg-white/2 p-4 transition hover:bg-white/4 hover:border-white/1 group"
                 >
                   <article className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-sm border-2 border-white/15 bg-white/[0.02] flex-shrink-0 mt-0.5 group-hover:border-white/30 transition-colors" aria-hidden="true" />
+                    <div
+                      className="w-5 h-5 rounded-sm border-2 border-white/15 bg-white/[0.02] flex-shrink-0 mt-0.5 group-hover:border-white/30 transition-colors"
+                      aria-hidden="true"
+                    />
                     <div>
                       <h3 className="font-semibold text-white/90 text-[13px] leading-snug">
                         {task.title}
@@ -221,9 +224,14 @@ export default function Streak({
       {/* Mobile / Tablet fallback: stacked cards with gaps */}
       <div className="xl:hidden space-y-4">
         {/* Learning Activity */}
-        <section aria-labelledby="mobile-activity-heading" className="rounded-2xl border border-white/[0.07] bg-gradient-to-b from-[#141420] to-[#0d0d18] p-6 text-white overflow-hidden">
+        <section
+          aria-labelledby="mobile-activity-heading"
+          className="rounded-2xl border border-white/[0.07] bg-gradient-to-b from-[#141420] to-[#0d0d18] p-6 text-white overflow-hidden"
+        >
           <header className="flex items-center justify-between mb-6">
-            <h2 id="mobile-activity-heading" className="text-xl font-bold">{title}</h2>
+            <h2 id="mobile-activity-heading" className="text-xl font-bold">
+              {title}
+            </h2>
             <div className="flex items-center gap-1.5 text-[10px] text-gray-500 font-bold uppercase tracking-widest">
               <span>Less</span>
               {[0, 1, 2, 3, 4].map((l) => (
@@ -277,7 +285,9 @@ export default function Streak({
                   <span className="inline-flex h-5 w-5 items-center justify-center rounded-sm border border-white/15 bg-white/[0.03] text-[10px] font-bold text-white/80">
                     {index + 1}
                   </span>
-                  <p className="text-[13px] font-medium text-white/85">{item}</p>
+                  <p className="text-[13px] font-medium text-white/85">
+                    {item}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -285,8 +295,14 @@ export default function Streak({
         </section>
 
         {/* Upcoming Deadlines */}
-        <section aria-labelledby="mobile-deadlines-heading" className="rounded-2xl border border-white/[0.07] bg-gradient-to-b from-[#141420] to-[#0d0d18] p-6">
-          <h2 id="mobile-deadlines-heading" className="text-xl font-bold text-white mb-5">
+        <section
+          aria-labelledby="mobile-deadlines-heading"
+          className="rounded-2xl border border-white/[0.07] bg-gradient-to-b from-[#141420] to-[#0d0d18] p-6"
+        >
+          <h2
+            id="mobile-deadlines-heading"
+            className="text-xl font-bold text-white mb-5"
+          >
             Upcoming Deadlines
           </h2>
           <ul className="space-y-3">
@@ -296,7 +312,10 @@ export default function Streak({
                 className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4"
               >
                 <article className="flex items-start gap-3">
-                  <div className="w-4 h-4 rounded-[3px] border-2 border-white/15 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                  <div
+                    className="w-4 h-4 rounded-[3px] border-2 border-white/15 flex-shrink-0 mt-0.5"
+                    aria-hidden="true"
+                  />
                   <div>
                     <h3 className="font-semibold text-white/90 text-[13px]">
                       {task.title}

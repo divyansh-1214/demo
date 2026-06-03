@@ -10,7 +10,9 @@ interface HeroProps {
 
 export default function Hero({ userData }: HeroProps) {
   const primaryUser = userData?.[0];
-  const name = primaryUser ? `${primaryUser.first_name} ${primaryUser.last_name}` : "Divyansh Srivastava";
+  const name = primaryUser
+    ? `${primaryUser.first_name} ${primaryUser.last_name}`
+    : "Divyansh Srivastava";
   const streak = primaryUser?.current_streak ?? 24;
   const coursesCompleted = primaryUser?.courses_completed ?? 12;
   const hoursLearned = primaryUser?.hours_learned ?? 148;
@@ -22,10 +24,13 @@ export default function Hero({ userData }: HeroProps) {
     >
       {/* Main Hero Card */}
       <PuzzleCard
-        rightEdge={{ type: "cutout", position: 155, radius: 30 }}
+        rightEdge={{ type: "cutout", position: 78, radius: 30 }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ opacity: { duration: 0.4, delay: 0.05 }, y: { type: "spring", stiffness: 300, damping: 20, delay: 0.05 } }}
+        transition={{
+          opacity: { duration: 0.4, delay: 0.05 },
+          y: { type: "spring", stiffness: 300, damping: 20, delay: 0.05 },
+        }}
         className="rounded-4xl cursor-pointer flex flex-col justify-between relative overflow-hidden"
         style={{
           height: "310px",
@@ -146,7 +151,10 @@ export default function Hero({ userData }: HeroProps) {
           bottomEdge={{ type: "cutout", position: "center", radius: 22 }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ opacity: { duration: 0.4, delay: 0.15 }, y: { type: "spring", stiffness: 300, damping: 20, delay: 0.15 } }}
+          transition={{
+            opacity: { duration: 0.4, delay: 0.15 },
+            y: { type: "spring", stiffness: 300, damping: 20, delay: 0.15 },
+          }}
           className="rounded-4xl cursor-pointer flex flex-col items-center justify-center text-center"
           style={{
             height: "155px",
@@ -172,7 +180,10 @@ export default function Hero({ userData }: HeroProps) {
           topEdge={{ type: "tab", position: "center", radius: 22 }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ opacity: { duration: 0.4, delay: 0.25 }, y: { type: "spring", stiffness: 300, damping: 20, delay: 0.25 } }}
+          transition={{
+            opacity: { duration: 0.4, delay: 0.25 },
+            y: { type: "spring", stiffness: 300, damping: 20, delay: 0.25 },
+          }}
           className="rounded-4xl cursor-pointer flex flex-col items-center justify-center text-center"
           style={{
             height: "155px",
@@ -197,7 +208,9 @@ export default function Hero({ userData }: HeroProps) {
       {/* Mobile stat cards */}
       <div className="flex xl:hidden gap-4">
         <div className="flex-1 rounded-2xl border border-white/[0.07] bg-white/2 p-5 flex flex-col items-center text-center">
-          <p className="text-4xl font-black text-white leading-none mb-1">{coursesCompleted}</p>
+          <p className="text-4xl font-black text-white leading-none mb-1">
+            {coursesCompleted}
+          </p>
           <span className="text-[9px] uppercase tracking-wider font-bold text-gray-500">
             Courses Completed
           </span>
